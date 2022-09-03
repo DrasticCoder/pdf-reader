@@ -52,11 +52,15 @@ export default function Reader() {
   return (
     
       <div className='container'>
-
+                                                           
           <form className='form-group' onSubmit={handlePdfFileSubmit}>
-              <input type="file" className='form-control'
-                  required onChange={handlePdfFileChange}
-              />
+
+         <div id="file-drag">
+          
+                <input type="file" className='form-control'
+                  required onChange={handlePdfFileChange}/>
+              </div>
+
               {pdfFileError && <div className='error-msg'>{pdfFileError}</div>}
               <br></br>
               <button type="submit" className='btn btn-success btn-lg'>
@@ -64,14 +68,13 @@ export default function Reader() {
               </button>
           </form>
           <br></br>
-          <h4>View PDF</h4>
+         
           <div className='pdf-container'>
-              {viewPdf && <><Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
+              {viewPdf && <>
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
                   <Viewer fileUrl={viewPdf}
                       plugins={[defaultLayoutPluginInstance]} />
               </Worker></>}
-
-              {!viewPdf && <>No pdf file selected</>}
           </div>
       </div>
 
